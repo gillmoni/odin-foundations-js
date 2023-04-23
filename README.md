@@ -1,2 +1,2 @@
-# odin-foundations-js
-code along foundation for odinproject foundations js
+# odin-foundations-rockpaperscissors
+code along foundation for odinproject foundations rockpaperscissors
