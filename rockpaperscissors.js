@@ -33,6 +33,10 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+function sleep (time) {
+    return new Promise((resolve) => setTimeout(resolve, time));
+  }
+
 function game() {
     console.log('JavaScript code loaded!');
 
@@ -52,7 +56,7 @@ function game() {
         button.addEventListener('click', function (e) {
             playerSelection = button.textContent.toLowerCase();
             console.log(`You chose ${button.textContent}`);
-            e.target.style.background = 'red';
+            e.target.style.background = 'yellow';
     
             // Play the round
             const result = playRound(playerSelection.toLowerCase(), computerSelection);
@@ -73,6 +77,9 @@ function game() {
                     console.log("It's a tie!");
                 }
             }
+            sleep(1000).then(() => {
+                e.target.style.background = '';
+            });
         });
     });
 
