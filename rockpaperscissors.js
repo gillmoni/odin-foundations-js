@@ -10,7 +10,7 @@ function getComputerChoice() {
     }
 }
 
-const playerSelection = 'rock';
+// const playerSelection = 'rock';
 const computerSelection = getComputerChoice();
 
 function playRound(playerSelection, computerSelection) {
@@ -34,32 +34,47 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
+    console.log('JavaScript code loaded!');
+
     let userScore = 0;
     let computerScore = 0;
     const count = 5;
     const winRegex = /You Win/;
     const looseRegex = /You Loose/;
 
-    for (let i = 0; i < count; i++) {
-        //Get user input
-        let playerSelection = prompt("Rock, Paper or Scissors?");
-        // Play the round
-        console.log(playRound(playerSelection.toLowerCase(), computerSelection));
+    //Get user input
+    let playerSelection = 0;
+    const buttons = document.querySelectorAll('button');
 
-        if (playRound(playerSelection, computerSelection).match(winRegex)) {
-            userScore++;
-        } else if (playRound(playerSelection, computerSelection).match(looseRegex)) {
-            computerScore++;
-        }
-    }
+    console.log('Click event listener registered!');
 
-    if (userScore > computerScore) {
-        return console.log("You won the game!");
-    } else if (userScore < computerScore) {
-        return console.log("You lost the game!");
-    } else {
-        return console.log("It's a tie!");
-    }
+    buttons.forEach((button) => {
+        button.addEventListener('click', function (e) {
+            playerSelection = button.textContent.toLowerCase();
+            console.log(`You chose ${button.textContent}`);
+            e.target.style.background = 'red';
+    
+            // Play the round
+            const result = playRound(playerSelection.toLowerCase(), computerSelection);
+            console.log(result);
+    
+            if (result.match(winRegex)) {
+                userScore++;
+            } else if (result.match(looseRegex)) {
+                computerScore++;
+            }
+    
+            if (userScore + computerScore === count) {
+                if (userScore > computerScore) {
+                    console.log("You won the game!");
+                } else if (userScore < computerScore) {
+                    console.log("You lost the game!");
+                } else {
+                    console.log("It's a tie!");
+                }
+            }
+        });
+    });
+
 }
-
 game()
